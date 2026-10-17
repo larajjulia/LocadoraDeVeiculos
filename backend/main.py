@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Any
 import psycopg2
 from psycopg2.extras import DictCursor
+from flask import Flask, jsonify
 
 
 class DatabaseManager:
@@ -45,3 +46,10 @@ class DatabaseManager:
 db = DatabaseManager()
 carro = (db.execute_select_all("SELECT * from carro"))
 print(carro)
+app = Flask(__name__) 
+
+@app.route("/carro", methods=["GET"])
+def get_carro():
+    return jsonify(carro), 200
+
+app.run("0.0.0.0", port=8000, debug=False)
