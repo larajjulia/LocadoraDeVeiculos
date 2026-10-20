@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import jsonify
 
-from servicos.database.carro import CarrosDoDatabase
+from servicos.carro import CarrosDoDatabase
 
 carros_blueprint = Blueprint("carro", __name__)
 
