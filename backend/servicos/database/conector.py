@@ -11,7 +11,7 @@ class DatabaseManager:
         self.conn = psycopg2.connect(
             dbname="BD_Locadora_De_Veiculos",
             user="postgres",
-            password="postgres",
+            password="JesusSaves!",
             host="127.0.0.1",
             port=5432,
         )
