@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from servicos.multas_atraso_devolucao import Multas_Atraso_DevolucaoDataBase
+from backend.servicos.multas_atraso_devolucao import Multas_Atraso_DevolucaoDataBase
 
 
 multas_atraso_devolucao_blueprint = Blueprint("multa_atraso_devolucao", __name__)

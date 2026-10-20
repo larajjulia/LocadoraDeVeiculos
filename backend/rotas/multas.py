@@ -1,8 +1,21 @@
-from flask import blueprints
+from flask import Blueprint, jsonify, request
+from servicos.multas import MultasDataBase
 
 
-multa_blueprint = Blueprint ("multa", __name__)
+multas_blueprint = Blueprint("multa", __name__)
 
-@multas.blueprint.route("/multa", methods=["GET"])
-def get_multa():
-    return jsonify(), 200
+@multas_blueprint.route("/multas", methods=["GET"])
+def get_multas():
+    id_locacao = request.args.get("id_locacao")
+    if id_locacao:
+        id_locacao = int(id_locacao)
+    return jsonify(MultasDataBase().get_multas(id_locacao)), 200
+
+@multas_blueprint.route("/multas", methods=["POST"])
+def post_multas():
+    json = request.get_json()
+    valor_multa = json.get("valor")
+    status = json.get("status")
+    id_multa = json.get("id_multa")
+    MultasDataBase().registra_multa(valor_multa, status, id_multa)
+    return jsonify("Inserir Multa")
