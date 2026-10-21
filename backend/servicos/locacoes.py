@@ -4,40 +4,54 @@ class LocacaoDatabase():
     def __init__(self, db_provider = DatabaseManager()) -> None:
         self.db = db_provider
 
-    def get_locacao(self, cpf: str = "", carro: str = "", id_locacao: int | None = None, data_retirada: str = ""):     
-        query = """ 
-              
-                SELECT * FROM locacao l
-                LEFT JOIN cliente  ON cliente.cpf = l.cpf
-                LEFT JOIN carro ON carro.placa_veiculo = l.placa_veiculo_locacao
-
+    def get_locacao(self, cpf: str = "", placa_veiculo: str = "", id_locacao: int | None = None, data_retirada: str = ""):     
+        query= """ 
+            SELECT c.*,
+                l.cnh,
+                l.valor_locacao,
+                l.hora_locacao::text AS hora_locacao,
+                l.data_retirada::text AS data_retirada,
+                l.data_devolucao_prevista::text AS data_devolucao_prevista,
+                l.data_devolucao_efetiva::text AS data_devolucao_efetiva,
+                l.id_locacao,
+                l.cpf,
+                l.placa_veiculo_locacao
+                FROM carro c                 
+                LEFT JOIN locacao l ON c.placa_veiculo = l.placa_veiculo_locacao
+                LEFT JOIN cliente cl ON cl.cpf = l.cpf
                 """
-        params = []
+
 
         if cpf:
-            query += " WHERE cliente.cpf = %s"
-            params.append(cpf)
+            query += f" WHERE cl.cpf = '{cpf}'"
 
-        if carro:
+
+        if placa_veiculo:
             if "WHERE" in query:
-                query += " AND carro.placa_veiculo = %s"
+                query+= f"AND c.placa_veiculo = '{placa_veiculo}'\n"
             else:
-                query += " WHERE carro.placa_veiculo = %s"
-            params.append(carro)
+                query+= f"WHERE c.placa_veiculo = '{placa_veiculo}'\n"
+
 
         if id_locacao:
             if "WHERE" in query:
-                query += " AND l.id_locacao = %s"
+                query+= f"AND l.id_locacao = '{id_locacao}'\n"
             else:
-                query += " WHERE l.id_locacao = %s"
-            params.append(id_locacao)
+                query+= f"WHERE l.id_locacao = '{id_locacao}'\n"
+
+        
 
         if data_retirada:
             if "WHERE" in query:
-                query += " AND l.data_retirada = %s"
+                query+= f"AND l.data_retirada = '{data_retirada}'\n"
             else:
-                query += " WHERE l.data_retirada = %s"
-            params.append(data_retirada)
+                query+= f"WHERE l.data_retirada = '{data_retirada}'\n"
 
-        return self.db.execute_select_all(query, params)
-    
+      
+
+        return self.db.execute_select_all(query)
+
+
+    def registra_locacao(self,cnh, valor_locacao, hora_locacao, data_retirada, data_devolucao_prevista, data_devolucao_efetiva, id_locacao, cpf, placa_veiculo_locacao):
+            statement = f"INSERT INTO locacao (cnh, valor_locacao, hora_locacao, data_retirada, data_devolucao_prevista, data_devolucao_efetiva, id_locacao, cpf, placa_veiculo_locacao) VALUES ('{cnh}', '{valor_locacao}', '{valor_locacao}', {data_retirada}, '{data_devolucao_prevista}', {data_devolucao_efetiva}, {id_locacao}, {cpf}, {placa_veiculo_locacao})"
+            self.db.execute_statement(statement)
