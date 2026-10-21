@@ -3,7 +3,7 @@ class CarrosDoDatabase():
     def __init__(self, db_provider = DatabaseManager()) -> None:
         self.db = db_provider
 
-    def get_carros(self, categoria: str = "", locacao: str = "", cliente: str = ""):
+    def get_carros(self, categoria: str = "", cliente: str = "", locacao: str = ""):
         query = """
                 SELECT * FROM carro c
                 LEFT JOIN locacao l ON l.placa_veiculo_locacao = c.placa_veiculo
