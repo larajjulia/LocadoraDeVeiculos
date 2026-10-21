@@ -5,8 +5,18 @@ class CarrosDoDatabase():
 
     def get_carros(self, categoria: str = "", cliente: str = "", locacao: str = ""):
         query = """
-                SELECT * FROM carro c
-                LEFT JOIN locacao l ON l.placa_veiculo_locacao = c.placa_veiculo
+                SELECT c.*,
+                l.cnh,
+                l.valor_locacao,
+                l.hora_locacao::text AS hora_locacao,
+                l.data_retirada::text AS data_retirada,
+                l.data_devolucao_prevista::text AS data_devolucao_prevista,
+                l.data_devolucao_efetiva::text AS data_devolucao_efetiva,
+                l.id_locacao,
+                l.cpf,
+                l.placa_veiculo_locacao
+                FROM carro c                 
+                LEFT JOIN locacao l ON c.placa_veiculo = l.placa_veiculo_locacao
                 LEFT JOIN cliente cl ON cl.cpf = l.cpf
                 """
         if categoria: 
