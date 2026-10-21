@@ -6,6 +6,9 @@ from rotas.clientes import cliente_blueprint
 from rotas.carro import carros_blueprint
 from rotas.alertafaltacarro import alertafaltacarro_blueprint
 from rotas.locacoes import locacao_blueprint
+from rotas.multas import multas_blueprint
+from rotas.multas_avaria import multas_avaria_blueprint
+from rotas.multas_atraso_devolucao import multas_atraso_devolucao_blueprint
 
 # temos um servidor, em que vamos cadastrar algumas rotas
 # Rotas: servem para buscar informações nessa API
@@ -28,5 +31,11 @@ app.register_blueprint(alertafaltacarro_blueprint)
 
 #cadastrar a rota de locações
 app.register_blueprint(locacao_blueprint)
+
+app.register_blueprint(multas_blueprint)
+
+app.register_blueprint(multas_avaria_blueprint)
+
+app.register_blueprint(multas_atraso_devolucao_blueprint)
 
 app.run("0.0.0.0", port=8000, debug=False)
