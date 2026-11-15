@@ -14,7 +14,7 @@ class ClienteDatabase():
         # A função retorna true se a execução de ambos os comandos do SQL forem
         # bem sucedidas
         def registra_cliente(self, nome: str, cpf: str, telefones: str) -> bool:
-                statement = f"INSERT INTO cliente (nome, cpf) VALUES ('{nome}', '{cpf}')\n"
+                statement = f"INSERT INTO cliente (nome_completo, cpf) VALUES ('{nome}', '{cpf}')\n"
                 ok = self.db.execute_statement(statement)
 
                 # atributo multivalorado

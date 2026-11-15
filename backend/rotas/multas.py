@@ -11,7 +11,7 @@ def get_multas():
         id_locacao = int(id_locacao)
     return jsonify(MultasDataBase().get_multas(id_locacao)), 200
 
-@multas_blueprint.route("/multas", methods=["POST"])
+@multas_blueprint.route("/multa_registrar", methods=["POST"])
 def post_multas():
     json = request.get_json()
     valor_multa = json.get("valor")

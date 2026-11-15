@@ -15,7 +15,7 @@ class MultasDataBase():
                         l.data_devolucao_efetiva::text AS data_devolucao_efetiva,
                         l.id_locacao,
                         l.cpf,
-                        l.placa_veiculo_locacao
+                        l.placa_veiculo
                 FROM multa m                 
                 LEFT JOIN locacao l ON l.id_Locacao = m.id_multa
                 """

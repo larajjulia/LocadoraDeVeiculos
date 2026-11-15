@@ -52,6 +52,7 @@ class LocacaoDatabase():
         return self.db.execute_select_all(query)
 
 
-    def registra_locacao(self,cnh, valor_locacao, hora_locacao, data_retirada, data_devolucao_prevista, data_devolucao_efetiva, id_locacao, cpf, placa_veiculo_locacao):
-            statement = f"INSERT INTO locacao (cnh, valor_locacao, hora_locacao, data_retirada, data_devolucao_prevista, data_devolucao_efetiva, id_locacao, cpf, placa_veiculo_locacao) VALUES ('{cnh}', '{valor_locacao}', '{valor_locacao}', {data_retirada}, '{data_devolucao_prevista}', {data_devolucao_efetiva}, {id_locacao}, {cpf}, {placa_veiculo_locacao})"
-            self.db.execute_statement(statement)
+    def registra_locacao(self,cnh, valor_locacao, valor_total, hora_locacao, data_retirada, data_devolucao_prevista, data_devolucao_efetiva, id_locacao, cpf, placa_veiculo):
+            statement = f"INSERT INTO locacao (cnh, valor_locacao, valor_total, hora_locacao, data_retirada, data_devolucao_prevista, data_devolucao_efetiva, id_locacao, cpf, placa_veiculo) VALUES ('{cnh}', '{valor_locacao}', '{valor_total}', '{hora_locacao}', {data_retirada}, '{data_devolucao_prevista}', {data_devolucao_efetiva}, {id_locacao}, {cpf}, {placa_veiculo})"
+            
+            return self.db.execute_statement(statement)

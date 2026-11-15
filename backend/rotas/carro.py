@@ -12,7 +12,7 @@ def get_carros():
     locacao = request.args.get("locacao", "")
     return jsonify(CarrosDoDatabase().get_carros(categoria, cliente, locacao)), 200
 
-@carros_blueprint.route("/carros", methods=["POST"])
+@carros_blueprint.route("/carros_registrar", methods=["POST"])
 def post_carros():
     json = request.get_json()
     categoria = json["categoria"]
@@ -23,5 +23,5 @@ def post_carros():
     valor_seguro = json["valor_seguro"]
     valor_diaria = json["valor_diaria"]
     CarrosDoDatabase().registra_carro(categoria, placa_veiculo, modelo, quilometragem, estado, valor_seguro, valor_diaria)
-    return jsonify("Cadastro de carro requisitado: "), 200
+    return jsonify("Cadastro de carro feito com sucesso!"), 200
 

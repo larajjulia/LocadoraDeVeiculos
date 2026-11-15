@@ -11,19 +11,20 @@ def get_locacao():
   
   return jsonify(linhas),200
 
-@locacao_blueprint.route("/locacao", methods=["POST"])
+@locacao_blueprint.route("/locacao_registrar", methods=["POST"])
 def post_carros():
     json = request.get_json()
-    cnh = request.get_json()
-    valor_locacao = request.get_json()
-    hora_locacao = request.get_json()
-    data_retirada = request.get_json()
-    data_devolucao_prevista = request.get_json()
-    data_devolucao_efetiva = request.get_json()
-    id_locacao = request.get_json()
-    cpf = request.get_json()
-    placa_veiculo_locacao = request.get_json()
+    cnh = json.get("cnh")
+    valor_locacao = json.get("valor_locacao")
+    valor_total = json.get("valor_total")
+    hora_locacao = json.get("hora_locacao")
+    data_retirada = json.get("data_retirada")
+    data_devolucao_prevista = json.get("data_devolucao_prevista")
+    data_devolucao_efetiva = json.get("data_devolucao_efetiva")
+    id_locacao = json.get("id_locacao")
+    cpf = json.get("cpf")
+    placa_veiculo = json.get("placa_veiculo")
 
 
-    LocacaoDatabase().registra_locacao(cnh, valor_locacao, hora_locacao, data_retirada, data_devolucao_prevista, data_devolucao_efetiva, id_locacao, cpf, placa_veiculo_locacao)
-    return jsonify("Cadastro de carro requisitado: "), 200
+    LocacaoDatabase().registra_locacao(cnh, valor_locacao, valor_total, hora_locacao, data_retirada, data_devolucao_prevista, data_devolucao_efetiva, id_locacao, cpf, placa_veiculo)
+    return jsonify("Nova locação registrada!"), 200
