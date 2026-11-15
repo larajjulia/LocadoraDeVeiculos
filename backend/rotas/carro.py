@@ -15,13 +15,13 @@ def get_carros():
 @carros_blueprint.route("/carros", methods=["POST"])
 def post_carros():
     json = request.get_json()
-    categoria = request.get_json()
-    placa_veiculo = request.get_json()
-    modelo = request.get_json()
-    quilometragem = request.get_json()
-    estado = request.get_json()
-    valor_seguro = request.get_json()
-    valor_diaria = request.get_json()
+    categoria = json["categoria"]
+    placa_veiculo = json["placa_veiculo"]
+    modelo = json["modelo"]
+    quilometragem = json["quilometragem"]
+    estado = json["estado"]
+    valor_seguro = json["valor_seguro"]
+    valor_diaria = json["valor_diaria"]
     CarrosDoDatabase().registra_carro(categoria, placa_veiculo, modelo, quilometragem, estado, valor_seguro, valor_diaria)
     return jsonify("Cadastro de carro requisitado: "), 200
 

@@ -10,6 +10,7 @@ from servicos.clientes import ClienteDatabase
 cliente_blueprint = Blueprint("cliente", __name__) # __name__ retorna o nome do módulo 
 
 @cliente_blueprint.route("/cliente_registrar", methods=["POST"]) # HTTPS POST: atualizar um recurso
+
 def post_cliente():
     json = request.get_json()
     nome = json.get("nome")
